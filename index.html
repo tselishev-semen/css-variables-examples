@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li {
+            list-style-type: decimal;
+        }
+
+        pre {
+            background: rgba(128, 128, 128, 0.2);
+            width: 700px;
+            padding: 2px 5px;
+        }
+    </style>
+</head>
+<body>
+
+<style>
+    :root {
+        --primary-main: #9fa5fe;
+        --primary-light: #c0effe;
+        --primary-dark: #4802fe;
+    }
+</style>
+<ul>
+    <li>Define your color map in CSS</li>
+    <pre>
+:root{
+    --primary-main: #9fa5fe;
+    --primary-light: #c0effe;
+    --primary-dark: #4802fe;
+}
+</pre>
+    <li>
+        Then you can read them in JS
+    </li>
+    <br/>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 600px">
+        <div id="main" style="padding: 10px; background: var(--primary-main)"></div>
+        <div id="light" style="padding: 10px; background: var(--primary-light)"></div>
+        <div id="dark" style="padding: 10px; background: var(--primary-dark); color: white"></div>
+    </div>
+    <br/>
+    <style>
+        .button {
+            color: var(--ui-button--color, #eb2f73);
+            background-color: var(--ui-button--background-color, #ffffff);
+            padding: 10px 15px;
+        }
+    </style>
+    <li>Define css variables for a component</li>
+    <pre>
+.button{
+    color: var(--ui-button--color, #eb2f73);
+    background-color: var(--ui-button--background-color, #ffffff);
+}
+    </pre>
+    <div>
+        <button class="button">
+            My Button Text
+        </button>
+    </div>
+    <br/>
+    <li>Theming using plain CSS</li>
+
+    <style>
+        .override-colors {
+            --ui-button--color: #41eb09;
+            --ui-button--background-color: #000000;
+        }
+    </style>
+    <pre>
+// DOM Tree: .override-colors .button
+.override-colors {
+    --ui-button--color: #41eb09;
+    --ui-button--background-color: #000000;
+}
+    </pre>
+    <div class="override-colors">
+        <button class="button">
+            My Button Text
+        </button>
+    </div>
+
+</ul>
+<script>
+    const documentStyles = window.getComputedStyle(document.documentElement)
+    const mainColor = documentStyles.getPropertyValue('--primary-main')
+    const lightColor = documentStyles.getPropertyValue('--primary-light')
+    const darkColor = documentStyles.getPropertyValue('--primary-dark')
+    document.getElementById('main').innerHTML = `primary-main=${mainColor}`;
+    document.getElementById('light').innerHTML = `primary-light=${lightColor}`;
+    document.getElementById('dark').innerHTML = `primary-dark=${darkColor}`;
+</script>
+
+</body>
+</html>
